@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import weHeader from '@/pages/common/header/index.vue'
+import weHeader from '@/components/common/header/index.vue'
 </script>
 
 <style scoped lang="scss">

@@ -1,3 +1,13 @@
+body {
+    padding: 0;
+    box-sizing: border-box;
+}
+.el-main {
+    padding: 0;
+    height: calc(100vh - 60px);
+}
+
 .el-header {
+    z-index: 1;
     padding: 0;
 }

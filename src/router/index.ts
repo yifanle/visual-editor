@@ -9,11 +9,11 @@ const routes:RouteRecordRaw[] = [
     children: [{
       path: '/',
       component: ()=>import('@/pages/index.vue'),
+    },
+    {
+      path: '/editor',
+      component: ()=>import('@/layouts/editor.vue'),
     }],
-  },
-  {
-    path: '/editor',
-    component: ()=>import('@/layouts/editor.vue'),
   },
   {
     path: '/admin',
