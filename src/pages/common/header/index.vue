@@ -4,7 +4,7 @@
       <el-col :span="4">
         <div class="logo">
           <span class="icon">
-            <svg-icon name="tab-RotateRectangle" size="20" color="#f12"></svg-icon>
+            <svg-icon name="tab-RotateRectangle" size="40" color="#f12"></svg-icon>
           </span>
           WorkFlow-Editor
         </div>
@@ -26,9 +26,16 @@
     color: #f12;
     font-size: 20px;
     font-weight: bold;
-    svg-icon {
-      margin: auto 0;
+    display: flex;
+    align-items: center;
+    .icon {
+      height: 100%;
+      padding: 0 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
+
   }
 }
 </style>
