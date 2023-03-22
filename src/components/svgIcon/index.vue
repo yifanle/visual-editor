@@ -2,12 +2,15 @@
 	<i v-if="isShowIconSvg" class="el-icon" :style="setIconSvgStyle">
 		<component :is="getIconName" />
 	</i>
-  <component v-else :is="getIconName" />
+	<IconConfigProvider v-else >
+		<Icon :style="setIconSvgStyle">
+			<component :is="getIconName" />
+		</Icon>
+	</IconConfigProvider>
 </template>
 
 <script setup lang="ts" name="svgIcon">
 import { computed } from 'vue';
-
 // 定义父组件传过来的值
 const props = defineProps({
 	// svg 图标组件名字
@@ -22,7 +25,7 @@ const props = defineProps({
 	// svg 颜色
 	color: {
 		type: String,
-    default: () => '#000',
+    	default: () => '#000',
 	},
 });
 

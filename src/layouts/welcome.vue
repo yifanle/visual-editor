@@ -10,5 +10,9 @@
 </template>
 
 <script setup lang="ts">
-import WeHeader from '@/layouts/components/weHeader/index.vue'
+import weHeader from '@/pages/common/header/index.vue'
 </script>
+
+<style scoped lang="scss">
+
+</style>

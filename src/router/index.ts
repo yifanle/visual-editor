@@ -12,6 +12,14 @@ const routes:RouteRecordRaw[] = [
     }],
   },
   {
+    path: '/editor',
+    component: ()=>import('@/layouts/editor.vue'),
+  },
+  {
+    path: '/admin',
+    component: ()=>import('@/layouts/admin.vue'),
+  },
+  {
     path: '/about',
     component: () => import('@/pages/about.vue'),
   },
