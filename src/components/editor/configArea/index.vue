@@ -9,7 +9,7 @@
 <style scoped lang="scss">
   .configArea {
     height: 100%;
-    border-left: 1px solid #f1f1f1;
+    border-left: 1px solid #fff;
     .empty {
       height: 100%;
       display: flex;
