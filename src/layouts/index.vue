@@ -3,7 +3,7 @@
     <el-header>
       <we-header />
     </el-header>
-    <el-main>
+    <el-main class="layout-container">
       <router-view ></router-view>
     </el-main>
   </el-container>
@@ -14,5 +14,7 @@ import weHeader from '@/components/common/header/index.vue'
 </script>
 
 <style scoped lang="scss">
-
+.layout-container {
+  overflow: hidden;
+}
 </style>

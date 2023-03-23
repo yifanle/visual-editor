@@ -26,7 +26,6 @@ const isCollapse = ref(false)
 </script>
 <style scoped lang="scss">
 $collapseBtnWidth: 20px;
-
 .left-materials {
     overflow: unset;
     position: relative;
@@ -49,11 +48,11 @@ $collapseBtnWidth: 20px;
     }
 }
 .hide {
-  width: calc($collapseBtnWidth / 2);
-  transition: width 0.3s;
+  width: 0;
+  transition: width 0.5s;
 }
 .show {
   width: 300px;
-  transition: width 0.3s;
+  transition: width 0.5s;
 }
 </style>
