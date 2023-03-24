@@ -7,17 +7,17 @@ const routes:RouteRecordRaw[] = [
     path: '/',
     component: ()=>import('@/layouts/index.vue'),
     children: [{
-      path: '/',
-      component: ()=>import('@/pages/index.vue'),
-    },
-    {
-      path: '/editor',
-      component: ()=>import('@/layouts/editor.vue'),
-    }],
-  },
-  {
-    path: '/admin',
-    component: ()=>import('@/layouts/admin.vue'),
+        path: '/',
+        component: ()=>import('@/pages/index.vue'),
+      },
+      {
+        path: '/editor',
+        component: ()=>import('@/layouts/editor.vue'),
+      },
+      {
+        path: '/admin',
+        component: ()=>import('@/layouts/admin.vue'),
+      }],
   },
   {
     path: '/about',

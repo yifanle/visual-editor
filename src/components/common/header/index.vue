@@ -4,13 +4,13 @@
       <el-col :span="4">
         <div class="logo">
           <span class="icon">
-            <svg-icon name="tab-RotateRectangle" size="30" color="#f12"></svg-icon>
+            <svg-icon name="tab-RotateRectangle" :size="30" color="#f12"></svg-icon>
           </span>
           WorkFlow-Editor
         </div>
       </el-col>
       <el-col :span="16">
-        <div class="tools"></div>  
+        <div class="tools"></div>
       </el-col>
       <el-col :span="4">
         <div></div>
@@ -21,7 +21,7 @@
           <el-dropdown trigger="click" @command="handleCommand">
             <span class="el-dropdown-link">
               <span>李逸凡</span>
-              <svg-icon class="arrow-down" size="20" name="tab-ChevronDown"/>
+              <svg-icon :size="20" name="tab-ChevronDown"/>
             </span>
             <template #dropdown>
               <el-dropdown-menu>
@@ -30,7 +30,7 @@
               </el-dropdown-menu>
             </template>
           </el-dropdown>
-        </div>  
+        </div>
       </el-col>
     </el-row>
   </div>

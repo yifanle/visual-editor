@@ -2,13 +2,13 @@
   <el-container>
     <el-aside class="left-materials" :class="isCollapse ? 'hide':'show'">
         <div class="collapse-btn" @click="()=> isCollapse = !isCollapse">
-            <svg-icon v-if="!isCollapse" name="tab-CaretLeft" size="18" />
-            <svg-icon v-else name="tab-CaretRight" size="18" />
+            <svg-icon v-if="!isCollapse" name="tab-CaretLeft" :size="18" />
+            <svg-icon v-else name="tab-CaretRight" :size="18" />
         </div>
         <materials v-if="!isCollapse"/>
     </el-aside>
     <el-main>
-        <main-canvas />
+        <main-canvas :data="state"/>
     </el-main>
     <el-aside>
         <config-area />
@@ -20,8 +20,11 @@ import Materials from '@/components/editor/materials/index.vue'
 import MainCanvas from '@/components/editor/mainCanvas/index.vue'
 import ConfigArea from '@/components/editor/configArea/index.vue'
 
+import data from '@/mock/data.json'
+
 import { ref } from 'vue'
 const isCollapse = ref(false)
+const state = ref(data);
 
 </script>
 <style scoped lang="scss">
@@ -38,13 +41,17 @@ $collapseBtnWidth: 20px;
         width: $collapseBtnWidth;
         height: $height;
         border-radius: 5px;
-        z-index: 1;
+        z-index: 2;
         background-color: #fff;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         right: calc($collapseBtnWidth / -2);
         top: 50%;
         transform: translateY(-50%);
         cursor: pointer;
+        transition: all 0.5s;
+        &:hover {
+            background-color: #ececec;
+        }
     }
 }
 .hide {

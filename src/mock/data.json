@@ -1,0 +1,13 @@
+{
+    "container" : {
+        "width" : "390px",
+        "height" : "800px",
+        "background-color": "#fff",
+        "top": "50%",
+        "left": "75%",
+        "transform": "translate(-75%, -50%)"
+    },
+    "blocks": [
+
+    ]
+}
