@@ -8,7 +8,7 @@
         <materials v-if="!isCollapse"/>
     </el-aside>
     <el-main>
-        <main-canvas :data="state"/>
+        <main-canvas v-model="state.container" />
     </el-main>
     <el-aside>
         <config-area />
@@ -22,10 +22,18 @@ import ConfigArea from '@/components/editor/configArea/index.vue'
 
 import data from '@/mock/data.json'
 
-import { ref } from 'vue'
-const isCollapse = ref(false)
-const state = ref(data);
+import { provide, ref } from 'vue'
+import type { InjectionKey } from 'vue'
 
+import IDataModel from '@/interface/IDataModel'
+import IRenderItem from '@/interface/IRenderItem'
+// 用于控制左侧面板的折叠
+const isCollapse = ref(false)
+// 读取的渲染的模型数据
+const state:IDataModel = ref(data).value;
+
+// const blocksKey = Symbol('blocks') as InjectionKey<IRenderItem[]>;
+provide('blocks', state.blocks);
 </script>
 <style scoped lang="scss">
 $collapseBtnWidth: 20px;
