@@ -1,0 +1,62 @@
+{
+  "materials": {},
+  "metadatas": [{
+      "group": {
+        "label": "表单",
+        "icon": "tab-Forms",
+        "components": [
+          {
+            "title": "输入框",
+            "key": "el-input",
+            "id": "input",
+            "render": {
+              "style": {},
+              "props": {
+                "type": "text",
+                "placeholder": "请输入内容"
+              }
+            },
+            "preview": {
+              "style": {},
+              "props": {
+                "type": "text",
+                "placeholder": "输入框"
+              }
+            }
+          },
+          {
+            "title": "按钮",
+            "key": "el-button",
+            "id": "button",
+            "render": {
+              "style": {},
+              "props": {
+                "type":"primary"
+              },
+              "slotContent": "按钮"
+            },
+            "preview": {
+              "style": {},
+              "props": {
+                "type":"primary"
+              },
+              "slotContent": "按钮"
+            }
+          },
+          {
+            "title": "评分组件",
+            "key": "el-rate",
+            "id": "text",
+            "render": {
+              "style": {},
+              "props": {}
+            },
+            "preview": {
+              "style": {},
+              "props": {}
+            }
+          }
+        ]
+      }
+    }]
+}

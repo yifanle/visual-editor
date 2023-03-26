@@ -2,21 +2,6 @@
   <div class="main-canvas">
     <div class="container" :style="container">
       <el-scrollbar :height="container.height">
-        <!-- <div class="empty">
-          <el-empty description="暂无数据" />
-        </div>
-        <div class="empty">
-          <el-empty description="暂无数据" />
-        </div>
-        <div class="empty">
-          <el-empty description="暂无数据" />
-        </div>
-        <div class="empty">
-          <el-empty description="暂无数据" />
-        </div>
-        <div class="empty">
-          <el-empty description="暂无数据" />
-        </div> -->
         <we-render></we-render>
       </el-scrollbar>
     </div>

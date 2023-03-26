@@ -5,7 +5,7 @@
             <svg-icon v-if="!isCollapse" name="tab-CaretLeft" :size="18" />
             <svg-icon v-else name="tab-CaretRight" :size="18" />
         </div>
-        <materials v-if="!isCollapse"/>
+        <materials v-model="materials" v-if="!isCollapse"/>
     </el-aside>
     <el-main>
         <main-canvas v-model="state.container" />
@@ -21,18 +21,19 @@ import MainCanvas from '@/components/editor/mainCanvas/index.vue'
 import ConfigArea from '@/components/editor/configArea/index.vue'
 
 import data from '@/mock/data.json'
+import materialsData from '@/mock/materials.json'
+
 
 import { provide, ref } from 'vue'
-import type { InjectionKey } from 'vue'
 
 import IDataModel from '@/interface/IDataModel'
-import IRenderItem from '@/interface/IRenderItem'
+import IMaterialsData from '@/interface/IMaterialsData'
 // 用于控制左侧面板的折叠
 const isCollapse = ref(false)
 // 读取的渲染的模型数据
 const state:IDataModel = ref(data).value;
+const materials: IMaterialsData = ref(materialsData).value;
 
-// const blocksKey = Symbol('blocks') as InjectionKey<IRenderItem[]>;
 provide('blocks', state.blocks);
 </script>
 <style scoped lang="scss">

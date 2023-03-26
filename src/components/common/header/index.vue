@@ -4,7 +4,7 @@
       <el-col :span="4">
         <div class="logo">
           <span class="icon">
-            <svg-icon name="tab-RotateRectangle" :size="30" color="#f12"></svg-icon>
+            <svg-icon name="tab-RotateRectangle" :size="30"></svg-icon>
           </span>
           WorkFlow-Editor
         </div>

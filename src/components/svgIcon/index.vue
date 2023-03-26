@@ -21,12 +21,7 @@ const props = defineProps({
 	size: {
 		type: Number,
 		default: () => 14,
-	},
-	// svg 颜色
-	color: {
-		type: String,
-    	default: () => '#000',
-	},
+	}
 });
 
 
@@ -40,7 +35,7 @@ const isShowIconSvg = computed(() => {
 });
 // 设置图标样式
 const setIconSvgStyle = computed(() => {
-	return `font-size: ${props.size}px;color: ${props.color};`;
+	return `font-size: ${props.size}px;`;
 });
 
 </script>
