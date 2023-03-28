@@ -6,7 +6,7 @@ import '@/assets/scss/element-plus.scss'
 import App from './App.vue'
 import router from './router'
 import { createPinia } from 'pinia'
-import { useIcon } from './hook/useIcon'
+import { useIcon } from './utils/useIcon'
 
 const app = createApp(App);
 // 注册所有的图标

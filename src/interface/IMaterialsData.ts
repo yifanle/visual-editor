@@ -1,4 +1,4 @@
-export default interface IMaterialsData {
+export interface IMaterialsData {
   materials: Object;
   metadatas: IMetaDatas[];
 }
@@ -13,7 +13,7 @@ interface IMaterialsGroup {
   components: IMaterialsComponent[];
 }
 
-interface IMaterialsComponent {
+export interface IMaterialsComponent {
   title: string;
   key: string;
   id: string;

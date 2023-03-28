@@ -22,7 +22,8 @@
             "top": "200px",
             "left": "200px",
             "z-index": 1
-         }
+         },
+         "slotContent":"按钮"
     }, {
         "key": "el-input",
         "id": "input",

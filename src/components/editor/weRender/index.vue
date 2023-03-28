@@ -1,16 +1,13 @@
 <template>
-  <component class="render-item" v-for="item in blocks" key="item.id" :is="item.key" v-bind="item.props" :style="item.style">
-    text
+  <component class="render-item" v-for="item in dataRef.blocks" :key="item.id" :is="item.key" v-bind="item.props" :style="item.style">
+    {{ item.slotContent }}
   </component>
 </template>
 <script setup lang="ts" name="WeRender">
-import IRenderItem from '@/interface/IRenderItem'
-import { inject } from 'vue';
+import IDataModel from '@/interface/IDataModel';
+import {ref, inject } from 'vue';
 
-const blocks = inject('blocks') as IRenderItem[];
-
-console.log(blocks)
-
+const dataRef = inject('dataRef') as IDataModel;
 </script>
 <style scoped lang="scss">
 .render-item {

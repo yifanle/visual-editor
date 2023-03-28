@@ -14,7 +14,7 @@
             </div>
           </template>
           <div class="material-list">
-            <div class="component" v-for="component in group.components" :key="component.id">
+            <div draggable="true" :ondragstart="(e:any) => dragstart(e,component)" class="component" v-for="component in group.components" :key="component.id">
               <div class="preview">
                 <component :is="component.key" v-bind="component.preview.props">
                   {{ component.preview.slotContent }}
@@ -41,15 +41,17 @@
   </div>
 </template>
 <script setup lang="ts" name="Materials">
-import IMaterialsData from '@/interface/IMaterialsData';
-import { computed } from 'vue';
-
+import { IMaterialsData, IMaterialsComponent } from '@/interface/IMaterialsData';
+import { computed, ref, onMounted, onUnmounted } from 'vue';
+import emitter from '@/utils/emitter';
+// 注册双向绑定的props 和 emit
 const props = defineProps({
   modelValue: {
     type: Object
   },
 })
 const emit = defineEmits(['update:modelValue'])
+// 由父组件editor传入的materials数据
 const materials = computed({
   get() {
     return props.modelValue
@@ -58,10 +60,15 @@ const materials = computed({
     emit('update:modelValue', val)
   }
 });
-
+// 方便使用的计算属性
 const metadatas = computed(() => {
   return (materials.value as IMaterialsData).metadatas;
 })
+// 开始拖拽的事件
+const dragstart = (e:any, component:IMaterialsComponent) => {
+    emitter.emit('ondragstart', component);
+}
+
 </script>
 <style scoped lang="scss">
 .materials {
@@ -95,7 +102,7 @@ const metadatas = computed(() => {
     height: 100%;
     width: 100%;
     display: grid;
-    padding: 5px;
+    padding: 0 5px;
     grid-template-columns: repeat(2, 110px);
 
     .component {

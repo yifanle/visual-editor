@@ -3,4 +3,5 @@ export default interface IRenderItem {
   key: string;
   style: Object;
   props?: Object;
+  slotContent?: string;
 }

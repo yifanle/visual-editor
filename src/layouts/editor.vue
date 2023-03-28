@@ -8,7 +8,7 @@
         <materials v-model="materials" v-if="!isCollapse"/>
     </el-aside>
     <el-main>
-        <main-canvas v-model="state.container" />
+        <main-canvas v-model="state" />
     </el-main>
     <el-aside>
         <config-area />
@@ -27,14 +27,15 @@ import materialsData from '@/mock/materials.json'
 import { provide, ref } from 'vue'
 
 import IDataModel from '@/interface/IDataModel'
-import IMaterialsData from '@/interface/IMaterialsData'
+import { IMaterialsData } from '@/interface/IMaterialsData'
 // 用于控制左侧面板的折叠
 const isCollapse = ref(false)
 // 读取的渲染的模型数据
 const state:IDataModel = ref(data).value;
 const materials: IMaterialsData = ref(materialsData).value;
 
-provide('blocks', state.blocks);
+// 如何在materials组件中为mainCanvas组件绑定事件？
+
 </script>
 <style scoped lang="scss">
 $collapseBtnWidth: 20px;

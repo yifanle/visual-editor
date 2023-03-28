@@ -1,7 +1,7 @@
 <template>
   <div class="main-canvas">
-    <div class="container" :style="container">
-      <el-scrollbar :height="container.height">
+    <div ref="canvasContainer" class="container" :style="dataRef.container">
+      <el-scrollbar :height="dataRef.container.height">
         <we-render></we-render>
       </el-scrollbar>
     </div>
@@ -9,7 +9,10 @@
 </template>
 <script setup lang="ts" name="MainCanvas">
 import WeRender from '@/components/editor/weRender/index.vue'
-import { computed, inject } from 'vue';
+import {provide, computed,ref, onUnmounted} from 'vue';
+import emitter from '@/utils/emitter';
+import deepcopy from 'deepcopy';
+import { IMaterialsComponent } from '@/interface/IMaterialsData';
 
 const props = defineProps({
   modelValue: {
@@ -18,20 +21,80 @@ const props = defineProps({
   }
 });
 const emit = defineEmits(['update:modelValue']);
-const container = computed({
+const dataRef = ref(props.modelValue);
+provide('dataRef', dataRef);
+
+let data = computed({
   get() {
-    return props.modelValue;
+    return dataRef.value; 
   },
-  set(val) {
-    emit('update:modelValue', val);
+  set(newValue) {
+    dataRef.value = newValue;
+    emit('update:modelValue', deepcopy(newValue));
   }
 });
-console.log(container.value)
+// 注册一个组件区的拖拽事件监听
+const canvasContainer = ref();
+let currentComponent:IMaterialsComponent = {} as IMaterialsComponent;
+const dragenter = (e:any) => {
+  e.dataTransfer.dropEffect = 'move';
+}
+
+const dragover = (e:any) => {
+  e.preventDefault();
+}
+
+const dragleave = (e:any) => {
+  e.dataTransfer.dropEffect = 'none';
+}
+
+const drop = (e:any) => {
+  let blocks = data.value.blocks;
+  data.value = {
+    ...data.value,
+    blocks: [
+      ...blocks,
+      {
+        id: currentComponent.id + new Date().getTime(),
+        key: currentComponent.key,
+        props: currentComponent.render.props,
+        style: {
+          top: e.offsetY+'px',
+          left: e.offsetX+'px',
+          "z-index": 1
+        },
+        slotContent: currentComponent.render.slotContent
+      }
+    ]
+  }
+  currentComponent = {} as IMaterialsComponent;
+}
+
+emitter.on('ondragstart', (data:any) => {
+  const component = data as IMaterialsComponent;
+  currentComponent = component;
+  // 为container注册拖拽监听事件
+  canvasContainer.value.addEventListener('dragenter', dragenter);
+  canvasContainer.value.addEventListener('dragover', dragover);
+  canvasContainer.value.addEventListener('dragleave', dragleave);
+  canvasContainer.value.addEventListener('drop', drop);
+});
+
+onUnmounted(() => {
+  emitter.off('ondragstart',() => {
+    canvasContainer.value.removeEventListener('dragenter', dragenter);
+    canvasContainer.value.removeEventListener('dragover', dragover);
+    canvasContainer.value.removeEventListener('dragleave', dragleave);
+    canvasContainer.value.removeEventListener('drop', drop);
+  });
+});
+
+
 </script>
 <style scoped lang="scss">
 .main-canvas {
   height: 100%;
-  background: radial-gradient(rgba(204, 209, 216, 0.3), #eeeeec);
+  background-image: radial-gradient(circle, #e9e9e9, #ededed, #f1f1f1, #f5f5f5, #f9f9f9);
   position: relative;
 
   .container {
@@ -39,6 +102,10 @@ console.log(container.value)
     border-radius: 5px;
     position: absolute;
     overflow: hidden;
+  }
+
+  .render-item {
+    position: absolute;
   }
 }
 </style>
