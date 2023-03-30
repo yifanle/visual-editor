@@ -15,7 +15,13 @@ body {
     z-index: 1;
     padding: 0;
 }
+.el-button+.el-button {
+    margin-left: 0;
+}
 
+.el-button {
+    transition: none;
+}
 // el-tabs
 .el-tabs__item.is-active {
     color: var(--materials-color);

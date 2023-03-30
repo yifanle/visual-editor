@@ -14,7 +14,8 @@
             "top": "100px",
             "left": "100px",
             "z-index": 1
-         }
+         },
+         "alignCenter": false
     }, {
         "key": "el-button",
         "id": "button",
@@ -23,7 +24,8 @@
             "left": "200px",
             "z-index": 1
          },
-         "slotContent":"按钮"
+         "slotContent":"按钮",
+         "alignCenter": false
     }, {
         "key": "el-input",
         "id": "input",
@@ -37,7 +39,8 @@
          "props": {
             "type": "text",
             "placeholder": "请输入内容"
-         }
+         },
+         "alignCenter": false
     }
     ]
 }

@@ -14,7 +14,7 @@
             </div>
           </template>
           <div class="material-list">
-            <div draggable="true" :ondragstart="(e:any) => dragstart(e,component)" class="component" v-for="component in group.components" :key="component.id">
+            <div draggable="true" :ondragstart="(e:any) => dragstart(e,component)" :ondragend="(e:any) => dragend(e)" class="component" v-for="component in group.components" :key="component.id">
               <div class="preview">
                 <component :is="component.key" v-bind="component.preview.props">
                   {{ component.preview.slotContent }}
@@ -43,7 +43,7 @@
 <script setup lang="ts" name="Materials">
 import { IMaterialsData, IMaterialsComponent } from '@/interface/IMaterialsData';
 import { computed, ref, onMounted, onUnmounted } from 'vue';
-import emitter from '@/utils/emitter';
+import EmitterUtil from '@/utils/EmitterUtil';
 // 注册双向绑定的props 和 emit
 const props = defineProps({
   modelValue: {
@@ -66,7 +66,11 @@ const metadatas = computed(() => {
 })
 // 开始拖拽的事件
 const dragstart = (e:any, component:IMaterialsComponent) => {
-    emitter.emit('ondragstart', component);
+  EmitterUtil.emit('ondragstart', component);
+}
+
+const dragend = (e:any) => {
+  EmitterUtil.emit('ondragend', null);
 }
 
 </script>

@@ -2,15 +2,15 @@
   <div class="main-canvas">
     <div ref="canvasContainer" class="container" :style="dataRef.container">
       <el-scrollbar :height="dataRef.container.height">
-        <we-render></we-render>
+        <we-render ref="renderItem"></we-render>
       </el-scrollbar>
     </div>
   </div>
 </template>
 <script setup lang="ts" name="MainCanvas">
 import WeRender from '@/components/editor/weRender/index.vue'
-import {provide, computed,ref, onUnmounted} from 'vue';
-import emitter from '@/utils/emitter';
+import {provide, computed,ref,onMounted, onUnmounted} from 'vue';
+import EmitterUtil from '@/utils/EmitterUtil';
 import deepcopy from 'deepcopy';
 import { IMaterialsComponent } from '@/interface/IMaterialsData';
 
@@ -63,30 +63,40 @@ const drop = (e:any) => {
           left: e.offsetX+'px',
           "z-index": 1
         },
-        slotContent: currentComponent.render.slotContent
+        slotContent: currentComponent.render.slotContent,
+        alignCenter: true
       }
     ]
   }
   currentComponent = {} as IMaterialsComponent;
 }
-
-emitter.on('ondragstart', (data:any) => {
-  const component = data as IMaterialsComponent;
-  currentComponent = component;
-  // 为container注册拖拽监听事件
+const onDragstart = () => {
   canvasContainer.value.addEventListener('dragenter', dragenter);
   canvasContainer.value.addEventListener('dragover', dragover);
   canvasContainer.value.addEventListener('dragleave', dragleave);
   canvasContainer.value.addEventListener('drop', drop);
+}
+const onDragend = () => {
+  canvasContainer.value.removeEventListener('dragenter', dragenter);
+  canvasContainer.value.removeEventListener('dragover', dragenter);
+  canvasContainer.value.removeEventListener('dragleave', dragenter);
+  canvasContainer.value.removeEventListener('drop', dragenter);
+}
+
+EmitterUtil.register('ondragstart', (data:any) => {
+  const component = data as IMaterialsComponent;
+  currentComponent = component;
+  // 为container注册拖拽监听事件
+  onDragstart();
 });
+EmitterUtil.register('ondragend',() => {
+  onDragend();
+})
+
+
 
 onUnmounted(() => {
-  emitter.off('ondragstart',() => {
-    canvasContainer.value.removeEventListener('dragenter', dragenter);
-    canvasContainer.value.removeEventListener('dragover', dragover);
-    canvasContainer.value.removeEventListener('dragleave', dragleave);
-    canvasContainer.value.removeEventListener('drop', drop);
-  });
+  EmitterUtil.destroy(['ondragstart','ondragend'],null);
 });
 
 
