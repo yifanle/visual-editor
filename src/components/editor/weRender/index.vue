@@ -4,17 +4,10 @@
   </component>
 </template>
 <script setup lang="ts" name="WeRender">
-import {ref, inject,onBeforeUpdate, onUpdated, computed } from 'vue';
+import {inject,onBeforeUpdate, onUpdated } from 'vue';
 
 const dataRef = inject('dataRef') as any;
-const data = computed({
-  get() {
-    return dataRef.value;
-  },
-  set(newValue) {
-    dataRef.value = newValue;
-  }
-});
+
 let listDom:any[] = [];
 
 onBeforeUpdate(() => {
@@ -23,7 +16,6 @@ onBeforeUpdate(() => {
 onUpdated(() => {
   for(let i=0; i<listDom.length; i++) {
     if(dataRef.value.blocks[i]?.alignCenter){
-      console.log(i,listDom.length)
       const top = dataRef.value.blocks[i].style.top.split('px')[0];
       const left = dataRef.value.blocks[i].style.left.split('px')[0];
       dataRef.value.blocks[i].style.top = top - listDom[i].$el.offsetHeight/2 + 'px';
@@ -40,5 +32,19 @@ const setItemRef = (el:any) => {
 <style scoped lang="scss">
 .render-item {
   position: absolute;
+  &::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+  }
+}
+
+.render-item__focus {
+  &::after {
+    border: 2px solid #409eff;
+  }
 }
 </style>
