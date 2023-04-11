@@ -1,5 +1,5 @@
 <template>
-  <el-menu default-active="2" class="el-menu-vertical" :collapse="porps.isCollapse">
+  <el-menu default-active="1" class="el-menu-vertical" :collapse="porps.isCollapse">
     <el-sub-menu index="1">
       <template #title>
         <svg-icon name="ele-Location" :size="16" />
