@@ -5,4 +5,5 @@ export default interface IRenderItem {
   props?: Object;
   slotContent?: string;
   alignCenter?: boolean;
+  fullWidth?: boolean;
 }

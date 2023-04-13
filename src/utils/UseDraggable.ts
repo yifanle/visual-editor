@@ -31,12 +31,13 @@ export default class UseDraggable {
           key: this.currentComponent.key,
           props: this.currentComponent.render.props,
           style: {
+            ...this.currentComponent.render.style,
             top: e.offsetY + 'px',
-            left: e.offsetX + 'px',
+            left: this.currentComponent.render.fullWidth ? this.currentComponent.render.style?.left : e.offsetX + 'px',
             "z-index": 1
           },
           slotContent: this.currentComponent.render.slotContent,
-          alignCenter: true
+          alignCenter: this.currentComponent.render.alignCenter,
         }
       ]
     }

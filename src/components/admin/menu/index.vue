@@ -3,7 +3,7 @@
     <el-sub-menu index="1">
       <template #title>
         <svg-icon name="ele-Location" :size="16" />
-        <span>Navigator One</span>
+        <span>业务审批管理</span>
       </template>
       <el-menu-item-group>
         <template #title><span>Group One</span></template>

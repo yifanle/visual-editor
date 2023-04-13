@@ -1,7 +1,10 @@
 <template>
-  <component :ref="setItemRef" class="render-item" v-for="item in dataRef.blocks" :key="item.id" :is="item.key" v-bind="item.props" :style="item.style">
-    {{ item.slotContent }}
-  </component>
+  <div :ref="setItemRef" @mousedown.stop="(e:any) => onMouseDown(e,i)" class="render-item" :class="item.focus ? 'render-item__focus':''" v-for="item,i in dataRef.blocks" :key="item.id" :style="item.style">
+    <component :is="item.key" v-bind="item.props" >
+      {{ item.slotContent }}
+    </component>
+  </div>
+  
 </template>
 <script setup lang="ts" name="WeRender">
 import {inject,onBeforeUpdate, onUpdated } from 'vue';
@@ -18,15 +21,22 @@ onUpdated(() => {
     if(dataRef.value.blocks[i]?.alignCenter){
       const top = dataRef.value.blocks[i].style.top.split('px')[0];
       const left = dataRef.value.blocks[i].style.left.split('px')[0];
-      dataRef.value.blocks[i].style.top = top - listDom[i].$el.offsetHeight/2 + 'px';
-      dataRef.value.blocks[i].style.left = left - listDom[i].$el.offsetWidth/2 + 'px';
+      dataRef.value.blocks[i].style.top = top - listDom[i].offsetHeight/2 + 'px';
+      dataRef.value.blocks[i].style.left = left - listDom[i].offsetWidth/2 + 'px';
       dataRef.value.blocks[i].alignCenter = false;
+      dataRef.value.blocks[i].focus = false;
     }
     
   }
 })
 const setItemRef = (el:any) => {
   listDom.push(el);
+}
+
+const onMouseDown = (e:any , index: number) => {
+  e.stopPropagation();
+  e.preventDefault();
+  dataRef.value.blocks[index].focus = true;
 }
 </script>
 <style scoped lang="scss">
@@ -44,7 +54,8 @@ const setItemRef = (el:any) => {
 
 .render-item__focus {
   &::after {
-    border: 2px solid #409eff;
+    border: 2px dotted #409eff;
+    background-color: rgba(12, 138, 255, 0.1);
   }
 }
 </style>

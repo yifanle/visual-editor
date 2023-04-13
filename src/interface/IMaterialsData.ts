@@ -22,7 +22,9 @@ export interface IMaterialsComponent {
 }
 
 interface IMataData {
-  style: Object;
+  style: any;
   props: Object;
   slotContent?: string;
+  alignCenter?: boolean;
+  fullWidth?: boolean;
 }
