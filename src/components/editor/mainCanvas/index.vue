@@ -9,7 +9,7 @@
 </template>
 <script setup lang="ts" name="MainCanvas">
 import WeRender from '@/components/editor/weRender/index.vue'
-import {provide, computed,ref,onMounted, onUnmounted} from 'vue';
+import {provide, computed,ref,onMounted, onUnmounted, watch} from 'vue';
 import EmitterUtil from '@/utils/EmitterUtil';
 import deepcopy from 'deepcopy';
 import UseDraggable from '@/utils/UseDraggable'
@@ -27,13 +27,21 @@ provide('dataRef', dataRef);
 
 let data = computed({
   get() {
-    return dataRef.value; 
+    return dataRef.value;
   },
   set(newValue) {
     dataRef.value = newValue;
     emit('update:modelValue', deepcopy(newValue));
   }
 });
+
+watch(data, (newVal, oldVal) => {
+  if (newVal !== oldVal) {
+    console.log('data changed:',data.value)
+  }
+},
+{ deep: true });
+
 // 注册一个组件区的拖拽事件监听
 const canvasContainer = ref();
 const draggable = new UseDraggable(canvasContainer,data);
