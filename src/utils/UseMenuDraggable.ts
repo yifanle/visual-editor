@@ -1,6 +1,6 @@
 import { IMaterialsComponent } from '@/interface/IMaterialsData';
  
-export default class UseDraggable {
+export default class UseMenuDraggable {
   private canvasContainer: any;
   private data: any;
   private currentComponent: IMaterialsComponent = {} as IMaterialsComponent;

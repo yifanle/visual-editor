@@ -1,6 +1,6 @@
 <template>
   <div class="main-canvas">
-    <div ref="canvasContainer" class="container" :style="dataRef.container">
+    <div ref="canvasContainer" @mousedown="containerMouseDown()" class="container" :style="dataRef.container">
       <el-scrollbar :height="dataRef.container.height">
         <we-render ref="renderItem"></we-render>
       </el-scrollbar>
@@ -12,7 +12,7 @@ import WeRender from '@/components/editor/weRender/index.vue'
 import {provide, computed,ref,onMounted, onUnmounted, watch} from 'vue';
 import EmitterUtil from '@/utils/EmitterUtil';
 import deepcopy from 'deepcopy';
-import UseDraggable from '@/utils/UseDraggable'
+import UseMenuDraggable from '@/utils/UseMenuDraggable'
 import { IMaterialsComponent } from '@/interface/IMaterialsData';
 
 const props = defineProps({
@@ -44,7 +44,7 @@ watch(data, (newVal, oldVal) => {
 
 // 注册一个组件区的拖拽事件监听
 const canvasContainer = ref();
-const draggable = new UseDraggable(canvasContainer,data);
+const draggable = new UseMenuDraggable(canvasContainer,data);
 
 EmitterUtil.register('ondragstart', (data:any) => {
   const component = data as IMaterialsComponent;
@@ -56,6 +56,9 @@ EmitterUtil.register('ondragend',() => {
   draggable.onDragend();
 })
 
+const containerMouseDown = () => {
+  EmitterUtil.emit('clearFocus',null);
+}
 
 onUnmounted(() => {
   EmitterUtil.destroy(['ondragstart','ondragend'],null);
