@@ -33,6 +33,15 @@ export default class UseFocus {
     this.focusable = false;
   }
 
+  onMouseEnter = (e: any, item: any) => {
+    if (item.focus) return;
+    item.hover = true;
+  }
+  
+  onMouseLeave = (e: any, item: any) => {
+    item.hover = false;
+  }
+
   onMouseDown = (e: any, item: any) => {
     e.stopPropagation();
     e.preventDefault();
