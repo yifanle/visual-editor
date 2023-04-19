@@ -15,12 +15,10 @@
     "element-plus": "^2.3.3",
     "mitt": "^3.0.0",
     "mockjs": "^1.1.0",
-    "normalize.css": "^8.0.1",
     "pinia": "^2.0.33",
     "sass": "^1.59.3",
     "vue": "^3.2.47",
-    "vue-router": "^4.1.6",
-    "vuedraggable": "^4.1.0"
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@types/node": "^18.15.3",
