@@ -6,7 +6,7 @@
           <span class="icon">
             <svg-icon name="tab-RotateRectangle" :size="30"></svg-icon>
           </span>
-          WorkFlow-Editor
+          Visual-Editor
         </div>
       </el-col>
       <el-col :span="16">
