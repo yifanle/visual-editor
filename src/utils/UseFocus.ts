@@ -1,36 +1,39 @@
-import { computed } from "vue";
+import { computed, ref } from "vue";
+import type {ComputedRef} from "vue";
 
 export default class UseFocus {
   private blocks: any;
   private callback: Function;
+  // 表示当前选中的元素的索引
+  private selectIndex = ref(-1);
 
-  public focusData = computed(() => {
+  focusData = computed(() => {
     let focus:any[] = [];
-    let unfocus:any[] = [];
-    this.blocks.value.forEach((block:any) => block.focus ? focus.push(block) : unfocus.push(block));
+    let unfocused:any[] = [];
+    this.blocks.value.forEach((block:any) => block.focus ? focus.push(block) : unfocused.push(block));
     return {
       focus,
-      unfocus
+      unfocused
     }
   });
 
-  private focusable: boolean = true;
+  lastSelectItem:ComputedRef<any> = computed(() => this.blocks.value[this.selectIndex.value]);
 
   constructor(blocks:any, callback: Function) {
     this.blocks = blocks;
     this.callback = callback;
   }
 
-  clearFocus = () => {
+  private clearFocus = () => {
     this.blocks.value.forEach((item: any) => {
       item.focus = false;
       item.hover = false;
     });
   }
-  
-  // 用于判断是否是连续点击
-  disableFocus = () => {
-    this.focusable = false;
+
+  onContainerMouseDown =(e: any) => {
+    this.clearFocus();
+    this.selectIndex.value = -1;
   }
 
   onMouseEnter = (e: any, item: any) => {
@@ -42,33 +45,23 @@ export default class UseFocus {
     item.hover = false;
   }
 
-  onMouseDown = (e: any, item: any) => {
+  onMouseDown = (e: any, item: any, index:number) => {
     e.stopPropagation();
     e.preventDefault();
     let { focus } = this.focusData.value;
     if (e.shiftKey) {
-      item.focus = !item.focus;
+      if(focus.length <= 1) {
+        item.focus = true;
+      } else {
+        item.focus = !item.focus;
+      }
     } else {
       if (!item.focus) {
         this.clearFocus();
         item.focus = true;
-        this.disableFocus();
-      } else {
-        // todo: 存在连续点击与拖拽切换的问题
-        if(!this.focusable){
-          this.focusable = true;
-        }else {
-          if (focus.length >= 2) {
-            this.clearFocus();
-            item.focus = true;
-            return;
-          }
-          item.focus = false;
-        }
-      }
-      
-      
+      } 
     }
+    this.selectIndex.value = index;
     this.callback(e);
   }
 

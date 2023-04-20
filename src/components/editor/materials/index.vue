@@ -14,7 +14,7 @@
             </div>
           </template>
           <div class="material-list">
-            <div draggable="true" :ondragstart="(e:any) => dragstart(e,component)" :ondragend="(e:any) => dragend(e)" class="component" v-for="component in group.components" :key="component.id">
+            <div draggable="true" @dragstart="(e:any) => dragstart(e,component)" @dragend="(e:any) => dragend(e)" class="component" v-for="component in group.components" :key="component.id">
               <div class="preview">
                 <component :is="component.key" v-bind="component.preview.props">
                   {{ component.preview.slotContent }}
