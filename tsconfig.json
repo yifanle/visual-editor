@@ -14,7 +14,7 @@
     "noEmit": true,
     // "types": ["element-plus/global"],
     // 只配置vite的alias会报错
-    "baseUrl":"./",   
+    "baseUrl":"./",
     "paths":{
       "@/*": ["src/*"]
     },

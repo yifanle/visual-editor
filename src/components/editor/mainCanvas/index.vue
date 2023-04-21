@@ -1,18 +1,15 @@
 <template>
   <div class="main-canvas">
-    <div ref="canvasContainer" @mousedown="containerMouseDown()" class="container" :style="dataRef.container">
-      <el-scrollbar ref="scrollbar">
-        <div @wheel="(e:any) => onWheel(e)" :style="{height: scrollHeight+'px',position:'relative'}">
+    <el-scrollbar height="calc(100vh - 100px)" ref="scrollbar">
+      <div ref="canvasContainer" @mousedown="containerMouseDown()" class="container" :style="dataRef.container">
           <we-render ref="renderItem"></we-render>
-        </div>
-      </el-scrollbar>
-    </div>
+      </div>
+    </el-scrollbar>
   </div>
 </template>
 <script setup lang="ts" name="MainCanvas">
 import WeRender from '@/components/editor/weRender/index.vue'
 import {provide, computed,ref,onMounted, onUnmounted, watch} from 'vue';
-import type {Ref} from 'vue';
 import EmitterUtil from '@/utils/EmitterUtil';
 import deepcopy from 'deepcopy';
 import UseMenuDraggable from '@/utils/UseMenuDraggable'
@@ -27,7 +24,6 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue']);
 const dataRef = ref(props.modelValue);
 const scrollbar = ref();
-const scrollHeight:Ref<number> = ref(parseInt(dataRef.value.container.height.split('px')[0]));
 provide('dataRef', dataRef);
 
 let data = computed({
@@ -63,19 +59,6 @@ EmitterUtil.register('ondragend',() => {
 
 const containerMouseDown = () => {
   EmitterUtil.emit('clearFocus',null);
-}
-
-
-const onWheel = (e:any) => {
-  console.log(scrollHeight.value);
-  if(e.deltaY > 0) {
-    scrollHeight.value += 100;
-    // scrollbar.value.scrollTo(0,scrollHeight.value);
-  } else {
-    scrollHeight.value <= parseInt(dataRef.value.container.height.split('px')[0]) ? scrollHeight.value-=0 : scrollHeight.value -= 100;
-  }
-  scrollbar.value.scrollTo(0,scrollHeight.value);
-
 }
 
 onUnmounted(() => {
