@@ -1,6 +1,8 @@
 import { createApp } from 'vue'
 import ElementPlus from 'element-plus'
-// import { VueInfiniteViewer } from "vue3-infinite-viewer";
+
+import { VueInfiniteViewer } from 'vue3-infinite-viewer';
+import Guides from 'vue3-guides';
 
 import 'element-plus/dist/index.css'
 import 'virtual:windi.css'
@@ -14,7 +16,8 @@ const app = createApp(App);
 // 注册所有的图标
 useIcon(app);
 
-// app.component('VueInfiniteViewer', VueInfiniteViewer);
+app.component('VueInfiniteViewer', VueInfiniteViewer);
+app.component('Guides', Guides);
 app.use(router);
 app.use(createPinia());
 app.use(ElementPlus);

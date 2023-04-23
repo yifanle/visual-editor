@@ -47,6 +47,7 @@ const handleCommand = (command: string) => {
   height: 64px;
   line-height: 64px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 2;
   .logo {
     color: #f12;
     font-size: 18px;
