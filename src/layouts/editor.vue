@@ -8,7 +8,9 @@
         <materials v-model="materials" v-if="!isCollapse"/>
     </el-aside>
     <el-main>
+      <DraggableRulerContainer>
         <main-canvas v-model="state" />
+      </DraggableRulerContainer>
     </el-main>
     <el-aside>
         <config-area />
@@ -19,6 +21,7 @@
 import Materials from '@/components/editor/materials/index.vue'
 import MainCanvas from '@/components/editor/mainCanvas/index.vue'
 import ConfigArea from '@/components/editor/configArea/index.vue'
+import DraggableRulerContainer from '@/components/editor/draggableRulerContainer/index.vue'
 
 import data from '@/mock/data.json'
 import materialsData from '@/mock/materials.json'

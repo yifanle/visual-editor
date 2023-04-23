@@ -1,11 +1,7 @@
 <template>
-  <div class="main-canvas">
-    <el-scrollbar height="calc(100vh - 100px)" ref="scrollbar">
-      <div ref="canvasContainer" @mousedown="containerMouseDown()" class="container" :style="dataRef.container">
-          <we-render ref="renderItem"></we-render>
-      </div>
-    </el-scrollbar>
-  </div>
+    <div ref="canvasContainer" @mousedown="containerMouseDown()" class="container" :style="dataRef.container">
+        <we-render ref="renderItem"></we-render>
+    </div>
 </template>
 <script setup lang="ts" name="MainCanvas">
 import WeRender from '@/components/editor/weRender/index.vue'
@@ -68,20 +64,15 @@ onUnmounted(() => {
 
 </script>
 <style scoped lang="scss">
-.main-canvas {
-  height: 100%;
-  background-image: radial-gradient(circle, #e9e9e9, #ededed, #f1f1f1, #f5f5f5, #f9f9f9);
-  position: relative;
 
-  .container {
+.container {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     border-radius: 5px;
-    position: absolute;
+    position: relative;
     overflow: hidden;
   }
 
   .render-item {
     position: absolute;
   }
-}
 </style>

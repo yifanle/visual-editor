@@ -8,7 +8,13 @@
           <materials v-model="materials" v-if="!isCollapse"/>
       </el-aside>
       <el-main>
-          <InfiniteViewerTest />
+          <InfiniteViewerTest >
+            <div class="viewport">
+                <el-scrollbar :height="600">
+                    <div class="content"></div>
+                </el-scrollbar>
+            </div>
+          </InfiniteViewerTest>
       </el-main>
       <el-aside>
           <config-area />
@@ -40,6 +46,20 @@
   </script>
   <style scoped lang="scss">
   $collapseBtnWidth: 20px;
+
+  .viewport {
+    position: absolute;
+    top: calc(50% - 300px);
+    left: calc(50% - 200px);
+    width: 400px;
+    height: 600px;
+    background: #f55;
+
+    .content {
+      height: 10000px;
+    }
+  }
+
   .left-materials {
       overflow: unset;
       position: relative;
