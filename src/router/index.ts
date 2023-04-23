@@ -24,6 +24,10 @@ const routes:RouteRecordRaw[] = [
     component: () => import('@/pages/about.vue'),
   },
   {
+    path: '/ivtest',
+    component: () => import('@/pages/test/infiniteViewerTest.vue'),
+  },
+  {
     path: '/:pathMatch(.*)*',
     component: () => import('@/pages/404.vue'),
   }

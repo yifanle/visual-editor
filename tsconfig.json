@@ -12,7 +12,7 @@
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
     "noEmit": true,
-    // "types": ["element-plus/global"],
+    "types": ["element-plus/global","webpack-env","node"],
     // 只配置vite的alias会报错
     "baseUrl":"./",
     "paths":{
