@@ -54,7 +54,7 @@ EmitterUtil.register('ondragend',() => {
 })
 
 const containerMouseDown = () => {
-  EmitterUtil.emit('clearFocus',null);
+  EmitterUtil.emit('containerMouseDown',null);
 }
 
 onUnmounted(() => {
