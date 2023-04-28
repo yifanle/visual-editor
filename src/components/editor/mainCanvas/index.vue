@@ -5,11 +5,12 @@
 </template>
 <script setup lang="ts" name="MainCanvas">
 import WeRender from '@/components/editor/weRender/index.vue'
-import {provide, computed,ref,onMounted, onUnmounted, watch} from 'vue';
+import {provide, computed,ref,onBeforeMount, onUnmounted, watch} from 'vue';
 import EmitterUtil from '@/utils/EmitterUtil';
 import deepcopy from 'deepcopy';
 import UseMenuDraggable from '@/utils/UseMenuDraggable'
 import { IMaterialsComponent } from '@/interface/IMaterialsData';
+import UseCommands from '@/utils/UseCommands';
 
 const props = defineProps({
   modelValue: {
@@ -19,7 +20,10 @@ const props = defineProps({
 });
 const emit = defineEmits(['update:modelValue']);
 const dataRef = ref(props.modelValue);
-const scrollbar = ref();
+const useCommands = UseCommands.getInstance();
+onBeforeMount(()=>{
+  useCommands.setData(dataRef);
+})
 provide('dataRef', dataRef);
 
 let data = computed({

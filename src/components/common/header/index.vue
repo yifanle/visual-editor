@@ -10,10 +10,9 @@
         </div>
       </el-col>
       <el-col :span="16">
-        <div class="tools"></div>
+        <tools-bar></tools-bar>
       </el-col>
       <el-col :span="4">
-        <div></div>
         <div class="profile">
           <div class="avatar">
             <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" />
@@ -36,6 +35,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import ToolsBar from '@/components/common/toolsbar/index.vue';
 const handleCommand = (command: string) => {
   console.log(command)
 }
@@ -45,13 +45,13 @@ const handleCommand = (command: string) => {
 .header {
   background-color: #fff;
   height: 64px;
-  line-height: 64px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   z-index: 2;
   .logo {
     color: #f12;
     font-size: 18px;
     font-weight: bold;
+    line-height: 64px;
     display: flex;
     align-items: center;
     .icon {
