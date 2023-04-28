@@ -59,6 +59,24 @@
               "style": {},
               "props": {}
             }
+          },
+          {
+            "title": "日历",
+            "key": "el-calendar",
+            "id": "el-calendar",
+            "render": {
+              "style": {
+                "width": "90%"
+              },
+              "props": {},
+              "alignCenter": true
+            },
+            "preview": {
+              "style": {
+                "width": "100%"
+              },
+              "props": {}
+            }
           }
         ]
       }

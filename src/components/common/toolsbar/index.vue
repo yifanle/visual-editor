@@ -2,7 +2,7 @@
     <div class="tools" v-if="showToolbar">
         <el-tooltip :content="button.shortcut == '' ?`${button.label}` : `${button.label}(${button.shortcut})`" placement="bottom" effect="light" v-for="button in buttons">
             <div class="tool-btn" @click="button.handler()">
-                <svg-icon :size="18" :name="button.icon" />
+                <svg-icon :size="20" :name="button.icon" />
             </div>
         </el-tooltip>
     </div>
@@ -54,7 +54,7 @@ const toggleToolbar = () => {
       align-items: center;
       justify-content: center;
       padding: 8px 8px;
-      margin-right: 10px;
+      margin-right: 30px;
       color: #4169e1;
       user-select: none;
       cursor: pointer;
