@@ -20,15 +20,15 @@ export default class EmitterUtil {
     }
   }
 
-  public static destroy(names: string[],handler:any){
+  public static destroy(names: string[],handlers:any[]){
     if(this.emitter) {
-      names.filter((name) => {
-        if(this.registryList.includes(name)) {
-          console.log('destroy',name);
-          handler ? this.emitter.off(name,handler) : this.emitter.off(name);
-          this.registryList.splice(this.registryList.indexOf(name),1);
+      for(let i = 0; i < names.length; i++) {
+        if(this.registryList.includes(names[i])) {
+          console.log('destroy',names[i]);
+          handlers&&handlers.length>0 ? this.emitter.off(names[i],handlers[i]) : this.emitter.off(names[i]);
+          this.registryList.splice(this.registryList.indexOf(names[i]),1);
         }
-      });
+      }
     }
   }
 }
