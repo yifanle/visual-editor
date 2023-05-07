@@ -10,7 +10,7 @@ import EmitterUtil from '@/utils/EmitterUtil';
 import deepcopy from 'deepcopy';
 import UseMenuDraggable from '@/utils/UseMenuDraggable'
 import { IMaterialsComponent } from '@/interface/IMaterialsData';
-import UseCommands from '@/utils/UseCommands';
+import UseCommands from '@/utils/commands/UseCommands';
 
 const props = defineProps({
   modelValue: {
@@ -38,7 +38,7 @@ let data = computed({
 
 watch(data, (newVal, oldVal) => {
   if (newVal !== oldVal) {
-    console.log('data changed:',data.value)
+    // console.log('data changed:',data.value)
   }
 },
 { deep: true });
@@ -62,7 +62,7 @@ const containerMouseDown = () => {
 }
 
 onUnmounted(() => {
-  EmitterUtil.destroy(['ondragstart','ondragend'],null);
+  EmitterUtil.destroy(['ondragstart','ondragend'],[]);
 });
 
 

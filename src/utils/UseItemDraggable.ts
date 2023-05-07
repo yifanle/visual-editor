@@ -1,6 +1,7 @@
 import IDragState ,{ ILines } from "@/interface/IDragState";
 import type {ComputedRef} from "vue";
 import { reactive } from "vue";
+import EmitterUtil from "./EmitterUtil";
 
 export default class UseItemDraggable {
   private dragState:IDragState;
@@ -19,12 +20,17 @@ export default class UseItemDraggable {
       startLeft: 0,
       startTop: 0,
       startPos: [],
+      dragging: false,
       lines: {x:[],y:[]}
     }
   }
 
   private onMouseMove = (e:any) => {
     let { clientX: moveX, clientY: moveY } = e;
+    if(!this.dragState.dragging) {
+      this.dragState.dragging = true;
+      EmitterUtil.emit('start');
+    }
     let y=-1,x=-1; // 用于存放辅助线的位置
     // 先计算出最后一个选中的元素的位置
     let left = moveX - this.dragState.startX + this.dragState.startLeft;
@@ -69,10 +75,12 @@ export default class UseItemDraggable {
     this.markLine.y = -1;
     document.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseup', this.onMouseUp);
+    if(this.dragState.dragging){
+      EmitterUtil.emit('end');
+    }
   }
   
   public onMouseDown = (e:any,lastSelectItem:ComputedRef<any>) => {
-
     const {left,top,width,height } = lastSelectItem.value.style;
     const BWidth = parseInt(width.split('px')[0]);
     const BHeight = parseInt(height.split('px')[0]);
@@ -80,6 +88,7 @@ export default class UseItemDraggable {
     this.dragState = {
       startX: e.clientX,
       startY: e.clientY,
+      dragging:false,
       startLeft: parseInt(left.split('px')[0]),
       startTop: parseInt(top.split('px')[0]),
       startPos: this.focusData.value.focus.map(({ style }:any) => {

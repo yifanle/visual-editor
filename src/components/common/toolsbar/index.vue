@@ -10,23 +10,25 @@
 <script setup lang="ts" name="ToolsBar">
 import { ref ,watch} from 'vue';
 import { useRoute } from 'vue-router';
-import UseCommands from '@/utils/UseCommands';
+import UseCommands from '@/utils/commands/UseCommands';
 const route = useRoute();
 const showToolbar = ref(false);
 const useCommands = UseCommands.getInstance();
+useCommands.assembl();
 const command = {
-    redo: () => console.log(useCommands.getData().value),
-    undo: () => alert('正在努力开发中...')
+    redo: () => useCommands.commands.redo(),
+    undo: () => useCommands.commands.undo(),
+    other: () => alert('正在努力开发中...')
 }
 const buttons = [
-    {label:'保存',icon:'tab-FileCheck',shortcut:'ctrl+S',handler:command.undo},
-    {label:'复制',icon:'tab-Files',shortcut:'ctrl+C',handler:command.undo},
-    {label:'撤销',icon:'tab-ArrowBackUp',shortcut:'ctrl+Z',handler:command.redo},
-    {label:'恢复',icon:'tab-ArrowForwardUp',shortcut:'ctrl+Y', handler:command.undo},
-    {label:'清空',icon:'tab-TrashX',shortcut:'ctrl+Delete', handler:command.undo},
-    {label:'导入json数据',icon:'tab-FileCode',shortcut:'', handler:command.undo},
-    {label:'导出json数据',icon:'tab-FileDownload',shortcut:'', handler:command.undo},
-    {label:'预览',icon:'tab-Devices',shortcut:'', handler:command.undo},
+    {label:'保存',icon:'tab-FileCheck',shortcut:'ctrl+S',handler:command.other},
+    {label:'复制',icon:'tab-Files',shortcut:'ctrl+C',handler:command.other},
+    {label:'撤销',icon:'tab-ArrowBackUp',shortcut:'ctrl+Z',handler:command.undo},
+    {label:'恢复',icon:'tab-ArrowForwardUp',shortcut:'ctrl+Y', handler:command.redo},
+    {label:'清空',icon:'tab-TrashX',shortcut:'ctrl+Delete', handler:command.other},
+    {label:'导入json数据',icon:'tab-FileCode',shortcut:'', handler:command.other},
+    {label:'导出json数据',icon:'tab-FileDownload',shortcut:'', handler:command.other},
+    {label:'预览',icon:'tab-Devices',shortcut:'', handler:command.other},
 ]
 
 watch(route,()=>{

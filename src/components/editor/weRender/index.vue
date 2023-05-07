@@ -21,7 +21,6 @@ const dataRef = inject('dataRef') as any;
 const blocks = computed(() => dataRef.value.blocks);
 
 let listDom: any[] = [];
-
 const setItemRef = (el: any) => {
   listDom.push(el);
 }
@@ -39,7 +38,8 @@ onUpdated(() => {
       blocks.value[i].alignCenter = false;
       
     }
-    if(blocks.value[i].focus == undefined || blocks.value[i].hover == undefined) {
+    if(blocks.value[i]?.focus == undefined || blocks.value[i]?.hover == undefined) {
+      if(!blocks.value[i]) return;
       blocks.value[i].focus = false;
       blocks.value[i].hover = false;
     }

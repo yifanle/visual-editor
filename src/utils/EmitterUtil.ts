@@ -14,7 +14,7 @@ export default class EmitterUtil {
       this.emitter.on(name,handler);
     }
   }
-  public static emit(name: string, data: any):void {
+  public static emit(name: string, data?: any):void {
     if (this.emitter) {
       data ? this.emitter.emit(name,data) : this.emitter.emit(name);
     }

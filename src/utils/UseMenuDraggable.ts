@@ -1,4 +1,5 @@
 import { IMaterialsComponent } from '@/interface/IMaterialsData';
+import EmitterUtil from './EmitterUtil';
  
 export default class UseMenuDraggable {
   private canvasContainer: any;
@@ -53,11 +54,13 @@ export default class UseMenuDraggable {
     this.canvasContainer.value.addEventListener('dragover', this.dragover);
     this.canvasContainer.value.addEventListener('dragleave', this.dragleave);
     this.canvasContainer.value.addEventListener('drop', this.drop);
+    EmitterUtil.emit('start');
   }
   onDragend = () => {
     this.canvasContainer.value.removeEventListener('dragenter', this.dragenter);
     this.canvasContainer.value.removeEventListener('dragover', this.dragenter);
     this.canvasContainer.value.removeEventListener('dragleave', this.dragenter);
     this.canvasContainer.value.removeEventListener('drop', this.dragenter);
+    EmitterUtil.emit('end');
   }
 }

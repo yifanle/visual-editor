@@ -10,6 +10,7 @@ export default interface IDragState {
     top: number;
     left: number;
   }[];
+  dragging: boolean;
   lines: ILines;
 }
 
