@@ -13,7 +13,7 @@
 import EmitterUtil from '@/utils/EmitterUtil';
 import UseFocus from '@/utils/UseFocus';
 import UseItemDraggable from '@/utils/UseItemDraggable'
-import { computed, inject, onBeforeUpdate, onUpdated } from 'vue';
+import { computed, inject, onBeforeUpdate, onUpdated,nextTick } from 'vue';
 
 
 const dataRef = inject('dataRef') as any;
@@ -24,11 +24,7 @@ let listDom: any[] = [];
 const setItemRef = (el: any) => {
   listDom.push(el);
 }
-
-onBeforeUpdate(() => {
-  listDom = [];
-})
-onUpdated(() => {
+const init = () => {
   for (let i = 0; i < listDom.length; i++) {
     if (dataRef.value.blocks[i]?.alignCenter) {
       const top = blocks.value[i].style.top.split('px')[0];
@@ -46,8 +42,12 @@ onUpdated(() => {
     blocks.value[i].style.width = listDom[i].offsetWidth + 'px';
     blocks.value[i].style.height = listDom[i].offsetHeight + 'px';
   }
-})
-
+}
+onBeforeUpdate(() => {
+  listDom = [];
+});
+onUpdated(init);
+nextTick(init);
 
 const useFocus = new UseFocus(blocks, (e:any)=>{
   useItemDraggable.onMouseDown(e, useFocus.lastSelectItem);

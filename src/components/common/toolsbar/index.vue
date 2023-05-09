@@ -7,7 +7,7 @@
       </div>
     </el-tooltip>
   </div>
-  <el-dialog v-model="dialogVisible" title="Tips" width="30%" draggable :modal="false" :before-close="closeDialog" :close-on-click-modal="false">
+  <el-dialog v-model="dialogVisible" title="编辑JsonSchema" width="30%" draggable :modal="false" :before-close="closeDialog" :close-on-click-modal="false">
     <monaco-edit
       ref="monacoEditRef"
       :code="jsonCode"
