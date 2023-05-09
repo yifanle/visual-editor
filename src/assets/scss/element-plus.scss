@@ -22,6 +22,10 @@ body {
 .el-button {
     transition: none;
 }
+// dialog
+// .el-overlay {
+//     background-color: unset;
+// }
 // el-tabs
 .el-tabs__item.is-active {
     color: var(--materials-color);
@@ -37,5 +41,5 @@ body {
         height: 60px !important;
         line-height: unset;
     }
-    
+
 }
