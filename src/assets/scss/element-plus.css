@@ -26,6 +26,10 @@ body {
   transition: none;
 }
 
+.el-dialog__body {
+  padding: 5px 20px;
+}
+
 .el-tabs__item.is-active {
   color: var(--materials-color);
 }

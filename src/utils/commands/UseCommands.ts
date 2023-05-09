@@ -28,8 +28,8 @@ export default class UseCommands {
   }
   private registry(command: ICommand) {
     this.commandArray.push(command);
-    this.commands[command.name] = () => {
-      const executor = command.execute();
+    this.commands[command.name] = (...args:any) => {
+      const executor = command.execute(...args);
       executor.execute();
       
       if (!command.pushQueue) return;
@@ -84,7 +84,7 @@ export default class UseCommands {
 
   public assembl() {
     const that = this;
-    this.assembleArray.push(new Command('redo',[], () => {
+    this.assembleArray.push(new Command('redo', () => {
       return {
         execute() {
           let item = that.queue[that.current + 1];
@@ -95,7 +95,7 @@ export default class UseCommands {
         }
       }
     }, 'ctrl+y'));
-    this.assembleArray.push(new Command('undo',[], () => {
+    this.assembleArray.push(new Command('undo', () => {
       return {
         execute() {
           if (that.current === -1) return;
@@ -107,7 +107,7 @@ export default class UseCommands {
         }
       }
     }, 'ctrl+z'));
-    this.assembleArray.push(new Command('drag',['redo','undo'], () => {
+    this.assembleArray.push(new Command('drag', () => {
       let before = that.before;
       let after = that.data.value.blocks;
       return {
@@ -131,6 +131,23 @@ export default class UseCommands {
         EmitterUtil.destroy(['start', 'end'], [start, end]);
       }
     }));
+    this.assembleArray.push(new Command('updateCanvas',(newValue) =>{
+      let before = that.data.value;
+      let after = newValue;
+      console.log(newValue);
+      return {
+        execute() {
+          that.data.value = after;
+        },
+        redo() {
+          that.data.value = after;
+        },
+        undo() {
+          after = that.data.value;
+          that.data.value = before;
+        }
+      }
+    },undefined,true));
     this.assembleArray.forEach((command) => {
       this.registry(command);
     });

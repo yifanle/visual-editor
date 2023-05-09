@@ -7,12 +7,13 @@
       </div>
     </el-tooltip>
   </div>
-  <el-dialog v-model="dialogVisible" title="Tips" width="30%" draggable :modal="false" :close-on-click-modal="false">
+  <el-dialog v-model="dialogVisible" title="Tips" width="30%" draggable :modal="false" :before-close="closeDialog" :close-on-click-modal="false">
     <monaco-edit
       ref="monacoEditRef"
-      code="{console.log('123');console.log('456');}"
-      :language="IMonacoLanguage.TypeScript"
+      :code="jsonCode"
+      :language="IMonacoLanguage.JSON"
       :readonly="readOnly"
+      @onDidChangeModelContent="(codereturn) => onDidChangeModelContent(codereturn)"
     ></monaco-edit>
     <template #footer>
       <span class="dialog-footer">
@@ -27,24 +28,47 @@ import { useRoute } from 'vue-router';
 import UseCommands from '@/utils/commands/UseCommands';
 import monacoEdit from '@/components/monaco-edit/index.vue';
 import { IMonacoLanguage } from '@/components/monaco-edit/model/model';
+import EmitterUtil from '@/utils/EmitterUtil';
 
 const dialogVisible = ref(false);
 const readOnly = ref(true);
 const btnText = ref('编辑');
 const monacoEditRef = ref();
+let dataRef = ref();
+let jsonCode = ref();
+let before:any = null;
+
+EmitterUtil.register('setData',(data:any)=> {
+  dataRef = data;
+  jsonCode.value = JSON.stringify(dataRef.value);
+  useCommands.setData(dataRef);
+})
+
+
+const onDidChangeModelContent = (codereturn:any)=> {
+  jsonCode.value = codereturn;
+  dataRef.value = JSON.parse(jsonCode.value);
+}
+
 const editToggle = () => {
   readOnly.value = !readOnly.value;
   if(readOnly.value){
     btnText.value = '编辑';
+    useCommands.commands.updateCanvas(JSON.parse(jsonCode.value))
   }else{
     btnText.value = '保存';
   }
 }
 const openDialog = () => {
   dialogVisible.value = true;
+  jsonCode.value = JSON.stringify(dataRef.value);
+  before = dataRef.value;
 }
 const closeDialog = () => {
+  dataRef.value = before;
   dialogVisible.value = false;
+  readOnly.value = true;
+  btnText.value = '编辑';
 }
 
 const route = useRoute();
@@ -62,8 +86,7 @@ const buttons = [
   { label: '撤销', icon: 'tab-ArrowBackUp', shortcut: 'ctrl+Z', handler: command.undo },
   { label: '恢复', icon: 'tab-ArrowForwardUp', shortcut: 'ctrl+Y', handler: command.redo },
   { label: '清空', icon: 'tab-TrashX', shortcut: 'ctrl+Delete', handler: command.other },
-  { label: '导入json数据', icon: 'tab-FileCode', shortcut: '', handler: command.other },
-  { label: '导出json数据', icon: 'tab-FileDownload', shortcut: '', handler: ()=>openDialog() },
+  { label: '查看json数据', icon: 'tab-FileCode', shortcut: '', handler: ()=>openDialog() },
   { label: '预览', icon: 'tab-Devices', shortcut: '', handler: command.other },
 ]
 

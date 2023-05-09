@@ -2,7 +2,7 @@
   <div :ref="setItemRef" @mouseleave="(e: any) => useFocus.onMouseLeave(e, item)" @mouseenter="(e: any) => useFocus.onMouseEnter(e, item)"
     @mousedown.stop="(e: any) => useFocus.onMouseDown(e, item, i)" class="render-item" :class="item.focus ? 'render-item__focus' : ''"
     v-for="item,i in blocks" :key="item.id" :style="item.style">
-    <component :class="item.hover ? 'render-item__hover' : ''" :is="item.key" v-bind="item.props">
+    <component class="render-item_inner" :class="item.hover ? 'render-item__hover' : ''" :is="item.key" v-bind="item.props">
       {{ item.slotContent }}
     </component>
   </div>
@@ -80,7 +80,6 @@ EmitterUtil.register('containerMouseDown', useFocus.onContainerMouseDown);
 
 .render-item {
   position: absolute;
-
   &::after {
     content: '';
     position: absolute;
@@ -91,7 +90,10 @@ EmitterUtil.register('containerMouseDown', useFocus.onContainerMouseDown);
 
   }
 }
-
+.render-item_inner {
+  width: 100%;
+  height: 100%;
+}
 .render-item__focus {
   &::after {
     border: 2px solid #66b2fd;

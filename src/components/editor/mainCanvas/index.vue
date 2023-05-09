@@ -20,9 +20,8 @@ const props = defineProps({
 });
 const emit = defineEmits(['update:modelValue']);
 const dataRef = ref(props.modelValue);
-const useCommands = UseCommands.getInstance();
 onBeforeMount(()=>{
-  useCommands.setData(dataRef);
+  EmitterUtil.emit('setData',dataRef);
 })
 provide('dataRef', dataRef);
 

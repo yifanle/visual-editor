@@ -23,9 +23,9 @@ body {
     transition: none;
 }
 // dialog
-// .el-overlay {
-//     background-color: unset;
-// }
+.el-dialog__body {
+    padding: 5px 20px;
+}
 // el-tabs
 .el-tabs__item.is-active {
     color: var(--materials-color);

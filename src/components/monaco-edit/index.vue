@@ -2,7 +2,7 @@
     <div class="monaco" ref="monacoRef"></div>
 </template>
 <script setup lang="ts" name="MonacoEdit">
-import { PropType, ref, nextTick, computed ,watch} from 'vue';
+import { PropType, ref, nextTick, computed, watch } from 'vue';
 import monaco from './customMonaco';
 import { IMonacoLanguage } from './model/model';
 const props = defineProps({
@@ -23,14 +23,8 @@ const emit = defineEmits(['onDidChangeModelContent']);
 const monacoRef = ref<HTMLElement | null>(null);
 let editor: monaco.editor.IStandaloneCodeEditor;
 const readonly = computed(() => props.readonly);
-watch(readonly, (newVal, oldVal) => {
-    if(editor) {
-        editor.updateOptions({
-            readOnly: newVal
-        })
-    }
-})
-nextTick(() => {
+const code = computed(() => props.code);
+const init = () => {
     if (monacoRef.value) {
         editor = monaco.editor.create(monacoRef.value, {
             language: props.language,
@@ -40,9 +34,9 @@ nextTick(() => {
             readOnly: props.readonly,
             theme: 'vs'
         });
-        if(props.readonly) {
+        if (props.readonly) {
             editor.setValue(checkJsonCode(props.code));
-        }else {
+        } else {
             editor.setValue(props.code);
             editor.getAction('editor.action.formatDocument')?.run();//自动格式化代码
             editor.setValue(editor.getValue());//再次设置
@@ -52,30 +46,45 @@ nextTick(() => {
             emit('onDidChangeModelContent', editor.getValue());
         })
     }
-});
-const checkJsonCode = (strJsonCode:string) => {
-  let res = '';
-  try {
-    for (let i = 0, j = 0, k = 0, ii, ele; i < strJsonCode.length; i++) {
-      ele = strJsonCode.charAt(i);
-      if (j % 2 === 0 && ele === '}') {
-        k--;
-        for (ii = 0; ii < k; ii++) ele = `    ${ele}`;
-        ele = `\n${ele}`;
-      } else if (j % 2 === 0 && ele === '{') {
-        ele += '\n';
-        k++;
-        for (ii = 0; ii < k; ii++) ele += '    ';
-      } else if (j % 2 === 0 && ele === ',') {
-        ele += '\n';
-        for (ii = 0; ii < k; ii++) ele += '    ';
-      } else if (ele === '"') j++;
-      res += ele;
+}
+watch(code, (newVal, oldVal) => {
+    if (editor&&props.readonly) {
+        editor.dispose();
+        nextTick(init);
     }
-  } catch (error) {
-    res = strJsonCode;
-  }
-  return res;
+})
+
+watch(readonly, (newVal, oldVal) => {
+    if (editor) {
+        editor.updateOptions({
+            readOnly: newVal
+        })
+    }
+})
+nextTick(init);
+const checkJsonCode = (strJsonCode: string) => {
+    let res = '';
+    try {
+        for (let i = 0, j = 0, k = 0, ii, ele; i < strJsonCode.length; i++) {
+            ele = strJsonCode.charAt(i);
+            if (j % 2 === 0 && ele === '}') {
+                k--;
+                for (ii = 0; ii < k; ii++) ele = `    ${ele}`;
+                ele = `\n${ele}`;
+            } else if (j % 2 === 0 && ele === '{') {
+                ele += '\n';
+                k++;
+                for (ii = 0; ii < k; ii++) ele += '    ';
+            } else if (j % 2 === 0 && ele === ',') {
+                ele += '\n';
+                for (ii = 0; ii < k; ii++) ele += '    ';
+            } else if (ele === '"') j++;
+            res += ele;
+        }
+    } catch (error) {
+        res = strJsonCode;
+    }
+    return res;
 }
 
 const disposeEdit = () => {
@@ -88,5 +97,6 @@ defineExpose({
 <style scoped lang="scss">
 .monaco {
     height: 400px;
+    border: 2px solid var(--materials-color);
 }
 </style>
