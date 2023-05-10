@@ -8,18 +8,42 @@
 
 ```
 Visual-Editor是一个可视化拖拽编辑器，可拖拽左侧物料区组件，放置在中间画布中，并支持组件样式、属性、事件编辑。<br/>
-<a target="_blank" href="http://anyapp.run:3000/#/editor">项目预览地址</a> <br/>
-#### 可以用它：
+🔗 <a target="_blank" href="http://anyapp.run:3000/#/editor">项目预览地址</a> <br/>
+也许您对这个项目很感兴趣，也想加入项目未来的发展，或者您也有奇妙的想法想加在这个项目上，或者想通过这样的项目来提升自己的技术，让自己的简历上填上一笔，都期待您参与进来，<a href="#lianxi">欢迎私信骚扰</a>！
+#### 👓 效果图：
+<img src="https://img-blog.csdnimg.cn/39d92a06f109482c99ffd4efb0a61a19.gif"></img>
+#### ✨ 可以用它：
 > 可视化搭建表单<br/>
 > 低代码、可视化设计移动端、PC网页端页面设计<br/>
 
-#### 我们的不同：<br/>
+#### 🧿 我们的不同（计划）：<br/>
 > 不止拖拽：<br/>
 > 将实现自定义组件像画画一样简单！<br/>
 > 丰富的社区内容：<br/>
 > 敬请期待！
 
-#### 技术栈：<br/>
+#### 🔨 目前已经完成的功能：
+ - 左侧物料区添加组件
+ - 左侧物料区组件拖拽至中间画布
+ - 画布内组件拖拽位置变动
+ - 拖拽辅助线，自动对齐贴合
+ - 画布标尺，测量线，画布拖拽
+ - 撤销（ctrl+z）、恢复（ctrl+y）
+ - JSON数据编辑和导出（2023年5月9日）
+
+#### 🔮 未来的计划
+1.先将visual-editor编辑器的功能完善<br/>
+2.可结合visual-editor编辑器搭建：
+> - 流程可视化平台
+>- 可视化大屏
+>- 低代码/无代码 设计开发平台
+
+
+3.创建低代码平台组件、页面设计社区<br/>
+4.打通平台开发、平台数据支持、线上部署等业务<br/>
+5.定制私有化
+
+#### 🧬 技术栈：<br/>
 > `前端：`
 > - vue3
 > - TypeScript
@@ -31,7 +55,7 @@ Visual-Editor是一个可视化拖拽编辑器，可拖拽左侧物料区组件�
 > - springboot
 > - ······
 
-#### 前端项目目录介绍：
+#### 📂 前端项目目录介绍：
 ```
 workflow-editor
 ├─ src
@@ -90,7 +114,10 @@ workflow-editor
 └─ vite.config.ts
 
 ```
-#### 关于提交
+#### <a name="lianxi">联系我们</a>
+<a href="https://sm.ms/image/rPjZVdN8plneYHv" target="_blank"><img style="display:inline-block;width:300px;" src="https://s2.loli.net/2023/05/10/rPjZVdN8plneYHv.jpg" ></a>
+<a href="https://sm.ms/image/bDQwzRIu7xOEmdG" target="_blank"><img style="display:inline-block;width:300px;;" src="https://s2.loli.net/2023/05/10/bDQwzRIu7xOEmdG.jpg" ></a>
+#### 🧠 关于提交
 1.fork项目<br/>
 2.clone到本地<br/>
 3.在自己clone的项目中<br/>
