@@ -74,7 +74,7 @@ const editToggle = () => {
     save.value = true;
     dataRef.value = before;
     // 保存更新画布，并将操作防止命令栈中
-    useCommands.commands.updateCanvas(JSON.parse(jsonCode.value))
+    useCommands.commands.updateCanvas(JSON.parse(jsonCode.value));
   } else {
     btnText.value = '保存';
   }
@@ -110,6 +110,8 @@ const buttons = [
   { label: '恢复', icon: 'tab-ArrowForwardUp', shortcut: 'ctrl+Y', handler: command.redo },
   {
     label: '清空', icon: 'tab-TrashX', shortcut: 'ctrl+Delete', handler: () => openBox('是否确认清空画布？', '确认', 'warning', () => {
+      // 后期可能需要改为promise异步处理
+      useCommands.commands.updateCanvas({...dataRef.value, blocks: []});
       ElMessage({
         type: 'success',
         message: '清空成功',
