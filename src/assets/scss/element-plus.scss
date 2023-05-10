@@ -26,6 +26,19 @@ body {
 .el-dialog__body {
     padding: 5px 20px;
 }
+// message-box
+.el-message--success {
+    --el-message-text-color:var(--materials-color);
+}
+.el-message {
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: #fff solid 1px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    background-color: #fff;
+    transition: opacity .1s,transform .4s,top .4s;
+}
+
 // el-tabs
 .el-tabs__item.is-active {
     color: var(--materials-color);
