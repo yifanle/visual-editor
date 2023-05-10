@@ -9,7 +9,7 @@
 ```
 Visual-Editor是一个可视化拖拽编辑器，可拖拽左侧物料区组件，放置在中间画布中，并支持组件样式、属性、事件编辑。<br/>
 🔗 <a target="_blank" href="http://anyapp.run:3000/#/editor">项目预览地址</a> <br/>
-也许您对这个项目很感兴趣，也想加入项目未来的发展，或者您也有奇妙的想法想加在这个项目上，或者想通过这样的项目来提升自己的技术，让自己的简历上填上一笔，都期待您参与进来，<a href="#lianxi">欢迎私信骚扰</a>！
+也许您对这个项目很感兴趣，也想加入项目未来的发展，或者您也有奇妙的想法想加在这个项目上，或者想通过这样的项目来提升自己的技术，让自己的简历上填上一笔，都期待您参与进来，<a href="#lianxi">📡 欢迎私信骚扰</a>！
 #### 👓 效果图：
 <img src="https://img-blog.csdnimg.cn/39d92a06f109482c99ffd4efb0a61a19.gif"></img>
 #### ✨ 可以用它：
@@ -114,7 +114,8 @@ workflow-editor
 └─ vite.config.ts
 
 ```
-#### <a name="lianxi">联系我们</a>
+#### 📡 <a name="lianxi">联系我们</a>
+如果你也想成为这个项目的贡献者，可以扫描下方的二维码！只要您的奇思妙想被采纳，或者参与项目的编写，都将成为这个项目的贡献者！欢迎您的加入🎉🎊！<br/>
 <a href="https://sm.ms/image/rPjZVdN8plneYHv" target="_blank"><img style="display:inline-block;width:300px;" src="https://s2.loli.net/2023/05/10/rPjZVdN8plneYHv.jpg" ></a>
 <a href="https://sm.ms/image/bDQwzRIu7xOEmdG" target="_blank"><img style="display:inline-block;width:300px;;" src="https://s2.loli.net/2023/05/10/bDQwzRIu7xOEmdG.jpg" ></a>
 #### 🧠 关于提交
