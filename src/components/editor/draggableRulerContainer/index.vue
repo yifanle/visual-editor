@@ -20,10 +20,12 @@
     <vue-infinite-viewer ref="viewer" :useMouseDrag="true" :useAutoZoom="false" :useWheelScroll="true" v-on:scroll="(e: any) => viewerScroll(e)" class="viewer">
       <slot></slot>
     </vue-infinite-viewer>
+    <Menu style="position: absolute;top: 10px;left: 10px;"></Menu>
   </div>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
+import Menu from '@/components/editor/menu/index.vue';
 
 const horizontalGuides = ref();
 const verticalGuides = ref();
@@ -84,5 +86,6 @@ const viewerScroll = (e: any) => {
     width: 30px;
     height: 100%;
   }
+  
 }
 </style>

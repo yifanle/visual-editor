@@ -1,7 +1,8 @@
 import { defineAsyncComponent } from "vue";
 import type { App } from "vue";
 import * as ele from '@element-plus/icons-vue';
-import * as tab from '@vicons/tabler'
+import * as tab from '@vicons/tabler';
+import * as fluent from '@vicons/fluent';
 import { Icon, IconConfigProvider } from '@vicons/utils'
 
 
@@ -11,6 +12,7 @@ const SvgIcon = defineAsyncComponent(() => import('@/components/svgIcon/index.vu
 export function useIcon(app: App) {
   const eleIcons = ele as any;
   const tabIcons = tab as any;
+  const fluentIcons = fluent as any;
   // 注册element-plus的图标
   for(const i in eleIcons) {
     const name = `ele-${eleIcons[i].name}`;
@@ -21,6 +23,12 @@ export function useIcon(app: App) {
     const name = `tab-${tabIcons[i].name}`;
     app.component(name, tabIcons[i]);
   }
+  // 注册xicons fluent的图标
+  for(const i in fluentIcons) {
+    const name = `flu-${fluentIcons[i].name}`;
+    app.component(name, fluentIcons[i]);
+  }
+
   // 注册xicons utils组件
   app.component('Icon', Icon);
   app.component('IconConfigProvider', IconConfigProvider);

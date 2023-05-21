@@ -1,7 +1,9 @@
 <template>
     <div ref="canvasContainer" @mousedown="containerMouseDown()" class="container" :style="dataRef.container">
         <we-render ref="renderItem"></we-render>
+        
     </div>
+    
 </template>
 <script setup lang="ts" name="MainCanvas">
 import WeRender from '@/components/editor/weRender/index.vue'
@@ -10,7 +12,6 @@ import EmitterUtil from '@/utils/EmitterUtil';
 import deepcopy from 'deepcopy';
 import UseMenuDraggable from '@/utils/UseMenuDraggable'
 import { IMaterialsComponent } from '@/interface/IMaterialsData';
-import UseCommands from '@/utils/commands/UseCommands';
 
 const props = defineProps({
   modelValue: {
@@ -78,4 +79,6 @@ onUnmounted(() => {
   .render-item {
     position: absolute;
   }
+
+  
 </style>

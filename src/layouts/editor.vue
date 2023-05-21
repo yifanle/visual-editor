@@ -75,4 +75,6 @@ $collapseBtnWidth: 20px;
   width: 300px;
   transition: width 0.5s;
 }
+
+
 </style>
